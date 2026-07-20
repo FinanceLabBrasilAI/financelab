@@ -1,0 +1,71 @@
+'client';
+
+import { motion } from "framer-motion";
+
+interface PricingCardProps {
+  name: string;
+  price: string;
+  period?: string;
+  description: string;
+  features: string[];
+  isPopular?: boolean;
+  buttonText: string;
+  onSelect: () => void;
+}
+
+export default function PricingCard({
+  name,
+  price,
+  period = "",
+  description,
+  features,
+  isPopular = false,
+  buttonText,
+  onSelect,
+}: PricingCardProps) {
+  return (
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.2 }}
+      className={`relative p-8 rounded-2xl bg-[#12141C] border flex flex-col justify-between space-y-6 shadow-xl ${
+        isPopular ? "border-[#00C853]/50 shadow-[#00C853]/5" : "border-[#1F222F]"
+      }`}
+    >
+      {isPopular && (
+        <div className="absolute top-0 right-0 bg-[#00C853] text-[#0B0C10] text-[10px] font-mono px-3 py-1 rounded-bl">
+          MAIS POPULAR
+        </div>
+      )}
+
+      <div className="space-y-4">
+        <span className={`text-xs font-mono uppercase ${isPopular ? "text-[#00C853]" : "text-[#8E929F]"}`}>
+          {name}
+        </span>
+        <div>
+          <span className="text-3xl font-bold text-white">{price}</span>
+          {period && <span className="text-xs font-mono text-[#8E929F] ml-1">{period}</span>}
+        </div>
+        <p className="text-[#8E929F] text-sm font-light">{description}</p>
+        
+        <ul className="space-y-2 pt-4 border-t border-[#1F222F]">
+          {features.map((feat, idx) => (
+            <li key={idx} className="text-xs text-[#C2C5D1] flex items-center gap-2">
+              <span className="text-[#00C853]">✓</span> {feat}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <button
+        onClick={onSelect}
+        className={`w-full py-3 rounded-lg font-mono text-xs transition-colors ${
+          isPopular
+            ? "bg-[#00C853] text-[#0B0C10] font-semibold hover:bg-[#00b04a]"
+            : "bg-[#0B0C10] border border-[#1F222F] text-white hover:border-[#00C853]"
+        }`}
+      >
+        {buttonText}
+      </button>
+    </motion.div>
+  );
+}
