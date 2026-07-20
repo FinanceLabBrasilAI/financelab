@@ -1,7 +1,6 @@
 'use client';
 
 import Link from "next/link";
-import Image from "next/image";
 import GridBackground from "../../../components/core/GridBackground";
 
 export default function TermosPage() {
@@ -13,13 +12,12 @@ export default function TermosPage() {
             {/* Header Comercial da Página de Termos */}
             <header className="relative z-20 max-w-5xl mx-auto px-6 py-6 flex items-center justify-between border-b border-[#1F222F]/60">
                 <Link href="/" className="flex items-center gap-3">
-                    <Image
-                        src="/logo.png"
+                    <img
+                        src="/financelab/logo.png"
                         alt="FinanceLab Logo"
-                        width={140}
+                        width={100}
                         height={35}
                         className="object-contain"
-                        priority
                     />
                 </Link>
                 <Link

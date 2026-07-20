@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/core/Header";
 import GridBackground from "../components/core/GridBackground";
@@ -225,8 +224,8 @@ export default function FinanceLabHome() {
       <footer className="relative z-10 border-t border-[#1F222F]/60 bg-[#0B0C10] py-12 px-6">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-[#1F222F]/40">
           <div className="flex items-center gap-3">
-            <Image
-              src="/logo-login.png"
+            <img
+              src="/financelab/logo-login.png"
               alt="FinanceLab Ícone"
               width={45}
               height={45}
