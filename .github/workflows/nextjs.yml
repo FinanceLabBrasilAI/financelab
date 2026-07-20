@@ -50,7 +50,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - name: Install dependencies
-        run: ${{ env.manager }} install
+        run: npm install && npm install --save-dev typescript
       - name: Build with Next.js
         run: ${{ env.runner }} next build
       - name: Upload artifact
