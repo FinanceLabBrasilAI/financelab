@@ -16,7 +16,7 @@ export const metadata = {
     ],
   },
   icons: {
-    icon: "/logo-login.png",
+    icon: "/financelab/logo-login.png",
   },
 };
 
