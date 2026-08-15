@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "../components/core/Header";
 import GridBackground from "../components/core/GridBackground";
 import MobileVideoFrame from "../components/core/MobileVideoFrame";
@@ -523,7 +524,7 @@ export default function FinanceLabHome() {
       <footer className="relative z-10 border-t border-[#1F222F]/70 bg-[#0B0C10] px-6 py-10 mt-20">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
           <div className="flex items-center gap-3">
-            <img src="/logo-login.png" alt="FinanceLab" width={42} height={42} className="object-contain" />
+            <Image src="/logo-login.png" alt="FinanceLab" width={42} height={42} className="object-contain" />
             <div>
               <div className="text-sm font-bold text-white">FinanceLab</div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#8E929F]">LabAI Tech</div>
@@ -539,10 +540,12 @@ export default function FinanceLabHome() {
                 aria-label="Baixar na Google Play"
                 className="inline-flex rounded-xl transition hover:opacity-90"
               >
-                <img
+                <Image
                   src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                   alt="Google Play"
-                  className="h-11 w-auto max-w-[170px] object-contain"
+                  width={170}
+                  height={50}
+                  className="h-11 w-auto object-contain"
                 />
               </a>
 
@@ -551,10 +554,12 @@ export default function FinanceLabHome() {
                 aria-label="Baixar na App Store"
                 className="inline-flex rounded-xl transition hover:opacity-90"
               >
-                <img
+                <Image
                   src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                   alt="App Store"
-                  className="h-11 w-auto max-w-[170px] object-contain"
+                  width={170}
+                  height={50}
+                  className="h-11 w-auto object-contain"
                 />
               </a>
             </div>
