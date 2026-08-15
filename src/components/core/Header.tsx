@@ -10,7 +10,7 @@ export default function Header() {
       <div className="flex items-center justify-between rounded-full border border-[#1F222F] bg-[#12141C]/70 px-4 py-3 shadow-[0_0_0_1px_rgba(255,255,255,0.02)] backdrop-blur-sm">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/logo.png"
+            src="/financelab/logo.png"
             alt="FinanceLab Logo"
             width={92}
             height={32}

@@ -8,7 +8,7 @@ export const metadata = {
     description: "Gestão financeira e inteligência artificial",
     images: [
       {
-        url: "/logo-login.png",
+        url: "/financelab/logo-login.png",
         width: 1200,
         height: 630,
         alt: "FinanceLab Logo",
