@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
+const isProduction = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
-  output: 'export', // Já configurado, essencial para GitHub Pages
-  basePath: '/financelab', // Essencial para GitHub Pages em subdiretório
+  output: 'export',
+  basePath: isProduction ? '/financelab' : '',
   images: {
-    unoptimized: true, // Necessário para exportação estática
+    unoptimized: true,
   },
 };
 

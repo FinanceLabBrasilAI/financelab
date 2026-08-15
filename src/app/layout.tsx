@@ -3,6 +3,21 @@ import "./globals.css";
 export const metadata = {
   title: "FinanceLab",
   description: "Gestão financeira e inteligência artificial",
+  openGraph: {
+    title: "FinanceLab",
+    description: "Gestão financeira e inteligência artificial",
+    images: [
+      {
+        url: "/logo-login.png",
+        width: 1200,
+        height: 630,
+        alt: "FinanceLab Logo",
+      },
+    ],
+  },
+  icons: {
+    icon: "/logo-login.png",
+  },
 };
 
 export default function RootLayout({
