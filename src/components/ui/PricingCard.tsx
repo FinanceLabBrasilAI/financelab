@@ -11,6 +11,7 @@ interface PricingCardProps {
   isPopular?: boolean;
   buttonText: string;
   onSelect: () => void;
+  isStatus?: boolean;
 }
 
 export default function PricingCard({
@@ -22,6 +23,7 @@ export default function PricingCard({
   isPopular = false,
   buttonText,
   onSelect,
+  isStatus = false,
 }: PricingCardProps) {
   return (
     <motion.div
@@ -56,16 +58,21 @@ export default function PricingCard({
         </ul>
       </div>
 
-      <button
-        onClick={onSelect}
-        className={`w-full py-3 rounded-lg font-mono text-xs transition-colors ${
-          isPopular
-            ? "bg-[#00C853] text-[#0B0C10] font-semibold hover:bg-[#00b04a]"
-            : "bg-[#0B0C10] border border-[#1F222F] text-white hover:border-[#00C853]"
-        }`}
-      >
-        {buttonText}
-      </button>
+      {isStatus ? (
+        <div className="w-full py-3 text-center text-xs font-semibold text-[#00C853]">{buttonText}</div>
+      ) : (
+        <button
+          type="button"
+          onClick={onSelect}
+          className={`w-full rounded-lg py-3 font-mono text-xs transition-colors ${
+            isPopular
+              ? "bg-[#FFC107] text-[#3E2723] font-semibold hover:bg-[#FFD54F]"
+              : "bg-[#0B0C10] border border-[#1F222F] text-white hover:border-[#00C853]"
+          }`}
+        >
+          {buttonText}
+        </button>
+      )}
     </motion.div>
   );
 }

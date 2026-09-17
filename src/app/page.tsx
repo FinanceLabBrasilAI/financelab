@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import Header from "../components/core/Header";
 import GridBackground from "../components/core/GridBackground";
 import MobileVideoFrame from "../components/core/MobileVideoFrame";
 import PricingCard from "../components/ui/PricingCard";
+import { getStoredUser, StoredUser } from "../services/api";
 import {
   ArrowRight,
   BarChart3,
@@ -150,6 +151,11 @@ const faqs = [
 export default function FinanceLabHome() {
   const router = useRouter();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [user, setUser] = useState<StoredUser | null>(null);
+
+  useEffect(() => {
+    setUser(getStoredUser());
+  }, []);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -184,10 +190,10 @@ export default function FinanceLabHome() {
             <div className="flex flex-col gap-4 sm:flex-row">
               <button
                 type="button"
-                onClick={() => goToRegister('silver')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C853] px-6 py-3.5 text-sm font-bold text-[#0B0C10] transition hover:bg-[#1AE078]"
+                onClick={() => user ? router.push('/oferta-gold') : goToRegister('silver')}
+                className={`inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold transition ${user ? 'bg-[#FFC107] text-[#3E2723] hover:bg-[#FFD54F]' : 'bg-[#00C853] text-[#0B0C10] hover:bg-[#1AE078]'}`}
               >
-                Começar agora
+                {user ? 'Virar Gold' : 'Começar agora'}
                 <ArrowRight size={16} />
               </button>
 
@@ -412,8 +418,9 @@ export default function FinanceLabHome() {
                 }
                 features={features}
                 isPopular={highlight}
-                buttonText={name === "Gold" ? "Assinar Gold" : "Começar grátis"}
-                onSelect={() => goToRegister(name === 'Gold' ? 'gold' : 'silver')}
+                buttonText={name === "Gold" ? (user?.plano?.toLowerCase() === 'gold' ? "✓ Você já é assinante Gold" : "Assinar Gold") : user ? "✓ Você já é usuário Silver" : "Começar grátis"}
+                isStatus={!!user && (name === 'Silver' || user.plano?.toLowerCase() === 'gold')}
+                onSelect={() => name === 'Gold' ? router.push('/checkout') : router.push('/oferta-gold')}
               />
             ))}
           </div>
@@ -483,10 +490,10 @@ export default function FinanceLabHome() {
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
               <button
                 type="button"
-                onClick={() => goToRegister('silver')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C853] px-7 py-3.5 text-sm font-bold text-[#0B0C10] transition hover:bg-[#1AE078]"
+                onClick={() => user ? router.push('/oferta-gold') : goToRegister('gold')}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#FFC107] px-7 py-3.5 text-sm font-bold text-[#3E2723] transition hover:bg-[#FFD54F]"
               >
-                Começar agora
+                Virar Gold
                 <ArrowRight size={16} />
               </button>
               <Link

@@ -20,6 +20,7 @@ export const BEIA_WAKEUP_URL =
 export const API_URL = `${BASE_URL}/auth`;
 export const USERS_API_URL = `${BASE_URL}/users`;
 export const AUTH_TOKEN_KEY = 'auth_token';
+export const AUTH_USER_KEY = 'auth_user';
 export const PORTFOLIO_API_URL = `${BASE_URL}/portfolio`;
 export const ALLOCATION_API_URL = `${BASE_URL}/allocation`;
 export const FUNDAMENTAL_API_URL = `${BASE_URL}/fundamental`;
@@ -64,6 +65,48 @@ export const clearAuthToken = async () => {
 
   try {
     storage.removeItem(AUTH_TOKEN_KEY);
+  } catch {
+    // noop
+  }
+};
+
+export type StoredUser = {
+  cpf?: string;
+  nome: string;
+  email?: string;
+  iniciais?: string;
+  plano?: string;
+};
+
+export const getStoredUser = (): StoredUser | null => {
+  const storage = getStorage();
+  if (!storage) return null;
+
+  try {
+    const user = storage.getItem(AUTH_USER_KEY);
+    return user ? JSON.parse(user) : null;
+  } catch {
+    return null;
+  }
+};
+
+export const saveStoredUser = (user: StoredUser) => {
+  const storage = getStorage();
+  if (!storage) return;
+
+  try {
+    storage.setItem(AUTH_USER_KEY, JSON.stringify(user));
+  } catch {
+    // noop
+  }
+};
+
+export const clearStoredUser = () => {
+  const storage = getStorage();
+  if (!storage) return;
+
+  try {
+    storage.removeItem(AUTH_USER_KEY);
   } catch {
     // noop
   }

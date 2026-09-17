@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import ProfileMenu from '../../components/core/ProfileMenu';
 import { ArrowRight, BellRing, BrainCircuit, CalendarDays, Check, Download, LineChart, ScanSearch, ShieldCheck, Sparkles, Wallet } from 'lucide-react';
 
 const benefits = [
@@ -21,6 +22,7 @@ export default function GoldOfferPage() {
           <Link href="/" className="flex items-center gap-3">
             <Image src="/financelab/logo.png" alt="FinanceLab" width={120} height={45} className="h-10 w-auto object-contain" priority />
           </Link>
+          <ProfileMenu />
         </header>
 
         <section className="relative mt-16 overflow-hidden rounded-4xl border border-[#FFC107]/50 bg-[#3E2723] p-8 shadow-[0_30px_90px_rgba(255,193,7,0.12)] md:p-14">

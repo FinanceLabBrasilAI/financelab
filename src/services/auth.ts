@@ -25,6 +25,7 @@ import {
   BASE_URL,
   ErroResponse,
   gerarIniciais,
+  saveStoredUser,
 } from './api';
 
 export type LoginResponse = {
@@ -92,16 +93,22 @@ export async function validarLogin(
       return { erro: normalizeErrorMessage(data) || 'Erro ao fazer login.' };
     }
 
-    if (data.token) {
-      await saveAuthToken(data.token);
-    }
-
-    return {
+    const user = {
       cpf: data.cpf,
       nome: data.nome,
       email: data.email || '',
       token: data.token,
       iniciais: data.iniciais || gerarIniciais(data.nome),
+      plano: data.plano || 'Silver',
+    };
+
+    if (data.token) {
+      await saveAuthToken(data.token);
+    }
+    saveStoredUser(user);
+
+    return {
+      ...user,
     };
   } catch {
     return { erro: 'Falha na conexão com o servidor.' };
