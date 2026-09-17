@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Header from "../components/core/Header";
 import GridBackground from "../components/core/GridBackground";
 import MobileVideoFrame from "../components/core/MobileVideoFrame";
+import PricingCard from "../components/ui/PricingCard";
 import {
   ArrowRight,
   BarChart3,
@@ -146,10 +148,15 @@ const faqs = [
 ];
 
 export default function FinanceLabHome() {
+  const router = useRouter();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const goToRegister = () => {
+    router.push('/register');
   };
 
   return (
@@ -175,13 +182,14 @@ export default function FinanceLabHome() {
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
-              <a
-                href="#pricing"
+              <button
+                type="button"
+                onClick={goToRegister}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C853] px-6 py-3.5 text-sm font-bold text-[#0B0C10] transition hover:bg-[#1AE078]"
               >
                 Começar agora
                 <ArrowRight size={16} />
-              </a>
+              </button>
 
               <a
                 href="#features"
@@ -257,7 +265,7 @@ export default function FinanceLabHome() {
                     {[22, 30, 28, 44, 50, 58, 72].map((height, index) => (
                       <div
                         key={index}
-                        className="flex-1 rounded-t-lg bg-gradient-to-t from-[#00C853]/20 to-[#00C853]"
+                        className="flex-1 rounded-t-lg bg-linear-to-t from-[#00C853]/20 to-[#00C853]"
                         style={{ height: `${height}%` }}
                       />
                     ))}
@@ -285,14 +293,14 @@ export default function FinanceLabHome() {
         <section id="features" className="space-y-12 border-t border-[#1F222F]/70 pt-20 mt-20">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#00C853]">Recursos para clientes e usuários</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-[-0.05em] text-white md:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tighter text-white md:text-5xl">
               Mais clareza para decidir melhor.
             </h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {features.map(({ icon: Icon, title, description }) => (
-              <div key={title} className="group rounded-[24px] border border-[#1F222F] bg-[#12141C]/80 p-6 transition hover:-translate-y-1 hover:border-[#00C853]/40 hover:shadow-[0_20px_40px_rgba(0,200,83,0.08)]">
+              <div key={title} className="group rounded-3xl border border-[#1F222F] bg-[#12141C]/80 p-6 transition hover:-translate-y-1 hover:border-[#00C853]/40 hover:shadow-[0_20px_40px_rgba(0,200,83,0.08)]">
                 <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[#00C853]/25 bg-[#00C853]/10 text-[#00C853]">
                   <Icon size={20} />
                 </div>
@@ -306,14 +314,14 @@ export default function FinanceLabHome() {
         <section className="border-t border-[#1F222F]/70 pt-20 mt-20">
           <div className="mx-auto mb-10 max-w-2xl text-center">
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#00C853]">Tutorial</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-[-0.05em] text-white md:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tighter text-white md:text-5xl">
               Como funciona
             </h2>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {steps.map(({ number, title, text }) => (
-              <div key={number} className="rounded-[24px] border border-[#1F222F] bg-[#12141C]/70 p-6">
+              <div key={number} className="rounded-3xl border border-[#1F222F] bg-[#12141C]/70 p-6">
                 <div className="mb-5 text-sm font-mono text-[#00C853]">{number}</div>
                 <h3 className="text-2xl font-bold text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[#A7ACB6]">{text}</p>
@@ -325,7 +333,7 @@ export default function FinanceLabHome() {
         <section className="border-t border-[#1F222F]/70 pt-20 mt-20">
           <div className="mb-10 max-w-2xl">
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#00C853]">Para quem é</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-[-0.05em] text-white md:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tighter text-white md:text-5xl">
               O mesmo produto, com valor para todos os perfis.
             </h2>
           </div>
@@ -354,7 +362,7 @@ export default function FinanceLabHome() {
             <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="flex flex-col justify-center text-center">
               <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#00C853]">Por que funciona</p>
-              <h2 className="mt-4 text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">
+              <h2 className="mt-4 text-4xl font-bold tracking-tighter text-white md:text-6xl">
                 A plataforma que organiza sua vida financeira.
               </h2>
               <p className="mt-5 mx-auto text-lg leading-relaxed text-[#A7ACB6]">
@@ -368,7 +376,7 @@ export default function FinanceLabHome() {
                   "Acompanha performance e dividendos com contexto real do mercado",
                 ].map((item) => (
                   <div key={item} className="flex items-center justify-center gap-3 rounded-2xl border border-[#1F222F] bg-[#12141C]/60 p-4 text-base text-[#D7DBE3]">
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#00C853]/10 text-[#00C853] flex-shrink-0">
+                    <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#00C853]/10 text-[#00C853]">
                       <LineChart size={14} />
                     </span>
                     {item}
@@ -385,58 +393,28 @@ export default function FinanceLabHome() {
         <section id="pricing" className="border-t border-[#1F222F]/70 pt-20 mt-20">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#00C853]">Planos</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-[-0.05em] text-white md:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tighter text-white md:text-5xl">
               Escolha o nivel que combina com seu momento.
             </h2>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {plans.map(({ name, price, highlight, features }) => (
-              <div
+              <PricingCard
                 key={name}
-                className={`rounded-[28px] border p-7 ${
-                  highlight
-                    ? "border-[#00C853]/50 bg-[#0F1713] shadow-[0_0_0_1px_rgba(0,200,83,0.2),0_30px_60px_rgba(0,200,83,0.08)]"
-                    : "border-[#1F222F] bg-[#12141C]/80"
-                }`}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-sm font-medium uppercase tracking-[0.2em] text-[#8E929F]">{name}</span>
-                  {highlight && (
-                    <span className="rounded-full bg-[#00C853] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-[#0B0C10]">
-                      Popular
-                    </span>
-                  )}
-                </div>
-
-                <div className="mt-6 flex items-end gap-2">
-                  <span className="text-4xl font-black text-white">{price}</span>
-                  {price !== "Gratuito" && <span className="pb-1 text-xs uppercase tracking-[0.2em] text-[#8E929F]">/mês</span>}
-                </div>
-
-                <ul className="mt-7 space-y-3 text-sm text-[#D7DBE3]">
-                  {features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#00C853]/10 text-[#00C853]">
-                        <Check size={12} />
-                      </span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="#"
-                  className={`mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-bold transition ${
-                    highlight
-                      ? "bg-[#00C853] text-[#0B0C10] hover:bg-[#1AE078]"
-                      : "border border-[#1F222F] bg-[#0B0C10] text-white hover:border-[#00C853]/40 hover:text-[#00C853]"
-                  }`}
-                >
-                  {name === "Gold" ? "Assinar Gold" : "Começar grátis"}
-                  <ArrowRight size={16} />
-                </a>
-              </div>
+                name={name}
+                price={price}
+                period={price !== "Gratuito" ? "/mês" : ""}
+                description={
+                  name === "Gold"
+                    ? "Acesso completo ao centro de inteligência, alertas e construção de estratégia com IA."
+                    : "Comece com uma visão simples da carteira e evolua com clareza na sua jornada financeira."
+                }
+                features={features}
+                isPopular={highlight}
+                buttonText={name === "Gold" ? "Assinar Gold" : "Começar grátis"}
+                onSelect={goToRegister}
+              />
             ))}
           </div>
         </section>
@@ -444,14 +422,14 @@ export default function FinanceLabHome() {
         <section className="border-t border-[#1F222F]/70 pt-20 mt-20">
           <div className="mx-auto max-w-2xl text-center">
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#00C853]">Depoimentos</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-[-0.05em] text-white md:text-5xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tighter text-white md:text-5xl">
               Quem usa entende o valor na prática.
             </h2>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {testimonials.map(({ name, text }) => (
-              <div key={name} className="rounded-[24px] border border-[#1F222F] bg-[#12141C]/80 p-6">
+              <div key={name} className="rounded-3xl border border-[#1F222F] bg-[#12141C]/80 p-6">
                 <div className="mb-5 flex items-center gap-1 text-[#00C853]">
                   {[...Array(5)].map((_, index) => (
                     <Star key={index} size={14} fill="currentColor" />
@@ -468,7 +446,7 @@ export default function FinanceLabHome() {
           <div className="mx-auto max-w-3xl">
             <div className="text-center">
               <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#00C853]">FAQ</p>
-              <h2 className="mt-4 text-3xl font-bold tracking-[-0.05em] text-white md:text-5xl">
+              <h2 className="mt-4 text-3xl font-bold tracking-tighter text-white md:text-5xl">
                 Perguntas rápidas.
               </h2>
             </div>
@@ -497,19 +475,20 @@ export default function FinanceLabHome() {
         </section>
 
         <section className="border-t border-[#1F222F]/70 pt-20 mt-20">
-          <div className="rounded-[30px] border border-[#00C853]/25 bg-[radial-gradient(circle_at_top,_rgba(0,200,83,0.15),_transparent_30%),_linear-gradient(180deg,_rgba(18,20,28,1),_rgba(11,12,16,1))] p-8 text-center md:p-12">
+          <div className="rounded-[30px] border border-[#00C853]/25 bg-[radial-gradient(circle_at_top,rgba(0,200,83,0.15),transparent_30%),linear-gradient(180deg,rgba(18,20,28,1),rgba(11,12,16,1))] p-8 text-center md:p-12">
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-[#00C853]">Próximo passo</p>
             <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-black tracking-[-0.06em] text-white md:text-5xl">
               Pare de analisar em planilhas e comece a investir com direção.
             </h2>
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-              <a
-                href="#pricing"
+              <button
+                type="button"
+                onClick={goToRegister}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C853] px-7 py-3.5 text-sm font-bold text-[#0B0C10] transition hover:bg-[#1AE078]"
               >
                 Começar agora
                 <ArrowRight size={16} />
-              </a>
+              </button>
               <Link
                 href="/legal/termos"
                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#1F222F] bg-[#12141C]/60 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-[#00C853]/50 hover:text-[#00C853]"

@@ -25,13 +25,13 @@ export default function Header() {
           <Link href="/legal/termos" className="transition hover:text-[#00C853]">Termos</Link>
         </nav>
 
-        <a
-          href="#pricing"
+        <Link
+          href="/register"
           className="inline-flex items-center rounded-full border border-[#00C853]/35 bg-[#00C853]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#00C853] transition hover:bg-[#00C853] hover:text-[#0B0C10]"
         >
           Comece agora
           <ArrowRight size={16} />
-        </a>
+        </Link>
       </div>
     </header>
   );
