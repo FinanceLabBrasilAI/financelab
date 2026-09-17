@@ -212,20 +212,20 @@ export default function FinanceLabHome() {
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-[#1F222F] bg-[#12141C]/80 p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_34px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm">
+          <div className="portfolio-panel-reveal rounded-[28px] border border-[#1F222F] bg-[#12141C]/80 p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.02),0_34px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm">
             <div className="rounded-[22px] border border-[#1F222F] bg-[#0D1116] p-5">
-              <div className="mb-5 flex items-center justify-between border-b border-[#1F222F] pb-4">
+              <div className="portfolio-item-reveal mb-5 flex items-center justify-between border-b border-[#1F222F] pb-4" style={{ animationDelay: "120ms" }}>
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.22em] text-[#8E929F]">Portfolio</p>
                   <h3 className="mt-2 text-2xl font-bold text-white">R$ 184.240</h3>
                 </div>
-                <div className="rounded-xl border border-[#00C853]/30 bg-[#00C853]/10 px-2 py-1 text-xs font-bold text-[#00C853]">
+                <div className="portfolio-pulse rounded-xl border border-[#00C853]/30 bg-[#00C853]/10 px-2 py-1 text-xs font-bold text-[#00C853]">
                   +12,8% no ano
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="rounded-2xl border border-[#1F222F] bg-[#12141C] p-4">
+                <div className="portfolio-item-reveal rounded-2xl border border-[#1F222F] bg-[#12141C] p-4" style={{ animationDelay: "260ms" }}>
                   <div className="mb-3 flex items-center justify-between text-sm text-[#8E929F]">
                     <span>Alocação</span>
                     <span className="text-white">67/23/10</span>
@@ -238,7 +238,7 @@ export default function FinanceLabHome() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="rounded-2xl border border-[#1F222F] bg-[#12141C] p-4">
+                  <div className="portfolio-item-reveal rounded-2xl border border-[#1F222F] bg-[#12141C] p-4" style={{ animationDelay: "380ms" }}>
                     <p className="text-[11px] uppercase tracking-[0.18em] text-[#8E929F]">Dividendos</p>
                     <p className="mt-2 text-xl font-bold text-white">R$ 2.410</p>
                     <div className="mt-3 flex items-center gap-1 text-[11px] text-[#00C853]">
@@ -246,7 +246,7 @@ export default function FinanceLabHome() {
                       +8,4% vs. mês anterior
                     </div>
                   </div>
-                  <div className="rounded-2xl border border-[#1F222F] bg-[#12141C] p-4">
+                  <div className="portfolio-item-reveal rounded-2xl border border-[#1F222F] bg-[#12141C] p-4" style={{ animationDelay: "460ms" }}>
                     <p className="text-[11px] uppercase tracking-[0.18em] text-[#8E929F]">Seu Perfil</p>
                     <p className="mt-2 text-xl font-bold text-white">Moderado</p>
                     <div className="mt-3 flex items-center gap-1 text-[11px] text-[#00C853]">
@@ -256,7 +256,7 @@ export default function FinanceLabHome() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-[#1F222F] bg-[#12141C] p-4">
+                <div className="portfolio-item-reveal rounded-2xl border border-[#1F222F] bg-[#12141C] p-4" style={{ animationDelay: "540ms" }}>
                   <div className="mb-2 flex items-center justify-between text-sm text-[#8E929F]">
                     <span>Rentabilidade</span>
                     <span className="text-[#00C853]">+18.6%</span>
@@ -265,8 +265,8 @@ export default function FinanceLabHome() {
                     {[22, 30, 28, 44, 50, 58, 72].map((height, index) => (
                       <div
                         key={index}
-                        className="flex-1 rounded-t-lg bg-linear-to-t from-[#00C853]/20 to-[#00C853]"
-                        style={{ height: `${height}%` }}
+                        className="portfolio-bar-grow flex-1 rounded-t-lg bg-linear-to-t from-[#00C853]/20 to-[#00C853]"
+                        style={{ height: `${height}%`, animationDelay: `${620 + index * 90}ms` }}
                       />
                     ))}
                   </div>
