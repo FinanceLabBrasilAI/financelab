@@ -155,8 +155,8 @@ export default function FinanceLabHome() {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const goToRegister = () => {
-    router.push('/register');
+  const goToRegister = (plan: 'silver' | 'gold' = 'silver') => {
+    router.push(`/register?plan=${plan}`);
   };
 
   return (
@@ -184,7 +184,7 @@ export default function FinanceLabHome() {
             <div className="flex flex-col gap-4 sm:flex-row">
               <button
                 type="button"
-                onClick={goToRegister}
+                onClick={() => goToRegister('silver')}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C853] px-6 py-3.5 text-sm font-bold text-[#0B0C10] transition hover:bg-[#1AE078]"
               >
                 Começar agora
@@ -413,7 +413,7 @@ export default function FinanceLabHome() {
                 features={features}
                 isPopular={highlight}
                 buttonText={name === "Gold" ? "Assinar Gold" : "Começar grátis"}
-                onSelect={goToRegister}
+                onSelect={() => goToRegister(name === 'Gold' ? 'gold' : 'silver')}
               />
             ))}
           </div>
@@ -483,7 +483,7 @@ export default function FinanceLabHome() {
             <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
               <button
                 type="button"
-                onClick={goToRegister}
+                onClick={() => goToRegister('silver')}
                 className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#00C853] px-7 py-3.5 text-sm font-bold text-[#0B0C10] transition hover:bg-[#1AE078]"
               >
                 Começar agora

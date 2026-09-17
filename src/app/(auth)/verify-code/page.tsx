@@ -65,7 +65,7 @@ export default function VerifyCodePage() {
 
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center">
-            <Image src="/logo-login.png" alt="FinanceLab" width={96} height={96} className="h-full w-full object-contain" priority />
+            <Image src="/financelab/logo-login.png" alt="FinanceLab" width={96} height={96} className="h-full w-full object-contain" priority />
           </div>
           <h1 className="text-3xl font-black tracking-tighter text-white">Código enviado</h1>
           <p className="mt-2 text-sm text-[#A7ACB6]">Digite o código de 6 dígitos enviado para seu e-mail.</p>

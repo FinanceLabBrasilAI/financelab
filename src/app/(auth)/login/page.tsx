@@ -56,7 +56,8 @@ export default function LoginPage() {
       return;
     }
 
-    router.push('/');
+    const plan = new URLSearchParams(window.location.search).get('plan');
+    router.push(plan === 'gold' ? '/checkout' : '/oferta-gold');
   };
 
   return (
@@ -69,7 +70,7 @@ export default function LoginPage() {
 
         <div className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center">
-            <Image src="/logo-login.png" alt="FinanceLab" width={96} height={96} className="h-full w-full object-contain" priority />
+            <Image src="/financelab/logo-login.png" alt="FinanceLab" width={96} height={96} className="h-full w-full object-contain" priority />
           </div>
           <h1 className="text-3xl font-black tracking-tighter text-white">FinanceLab</h1>
           <p className="mt-2 text-sm text-[#A7ACB6]">Acesse sua conta</p>
@@ -129,7 +130,7 @@ export default function LoginPage() {
           </Link>
           <p>
             Ainda não tem conta?{' '}
-            <Link href="/register" className="font-semibold text-[#00C853] hover:text-[#1AE078]">
+            <Link href={`/register?plan=${new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '').get('plan') || 'silver'}`} className="font-semibold text-[#00C853] hover:text-[#1AE078]">
               Criar conta
             </Link>
           </p>

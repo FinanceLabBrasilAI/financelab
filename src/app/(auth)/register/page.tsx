@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { buscarEnderecoPorCep } from '../../../services/cepService';
 import { cadastrarUsuario } from '../../../services/auth';
@@ -48,8 +48,14 @@ export default function RegisterPage() {
   });
   const [loading, setLoading] = useState(false);
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<'silver' | 'gold'>('silver');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  useEffect(() => {
+    const plan = new URLSearchParams(window.location.search).get('plan');
+    if (plan === 'gold') setSelectedPlan('gold');
+  }, []);
 
   const updateField = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -134,7 +140,7 @@ export default function RegisterPage() {
     }
 
     setSuccess('Conta criada com sucesso!');
-    setTimeout(() => router.push('/login'), 1200);
+    setTimeout(() => router.push(`/login?plan=${selectedPlan}`), 1200);
   };
 
   return (
@@ -144,8 +150,8 @@ export default function RegisterPage() {
           <Link href="/" aria-label="Voltar para a página inicial" className="justify-self-start inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#1F222F] text-[#A7ACB6] transition hover:border-[#00C853] hover:text-[#00C853]">
             <ArrowLeft size={17} />
           </Link>
-          <Image src="/logo.png" alt="FinanceLab" width={120} height={45} className="h-25 w-60 justify-self-center object-contain" priority />
-          <Link href="/login" className="justify-self-end text-sm font-semibold text-[#00C853] transition hover:text-[#1AE078]">
+          <Image src="/financelab/logo.png" alt="FinanceLab" width={120} height={45} className="h-25 w-60 justify-self-center object-contain" priority />
+          <Link href={`/login?plan=${selectedPlan}`} className="justify-self-end text-sm font-semibold text-[#00C853] transition hover:text-[#1AE078]">
             Já tenho conta
           </Link>
         </div>
