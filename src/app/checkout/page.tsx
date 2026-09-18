@@ -3,8 +3,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Check, LockKeyhole } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { fetchPlanPricing } from '../../services/planPricing';
 
 export default function CheckoutPage() {
+  const [monthlyPrice, setMonthlyPrice] = useState('—');
+
+  useEffect(() => {
+    fetchPlanPricing()
+      .then(({ monthly }) => setMonthlyPrice(monthly || 'Indisponível'))
+      .catch(() => setMonthlyPrice('Indisponível'));
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#0B0C10] px-6 py-10 text-[#F5F5F7]">
       <div className="mx-auto max-w-4xl">
@@ -23,7 +33,7 @@ export default function CheckoutPage() {
           </section>
 
           <aside className="rounded-[28px] border border-[#00C853]/30 bg-[#12141C] p-7 md:p-9">
-            <div className="flex items-center justify-between border-b border-[#1F222F] pb-5"><span className="text-sm text-[#A7ACB6]">Plano Gold</span><span className="text-2xl font-black text-white">R$ 29,90<span className="text-xs font-normal text-[#8E929F]">/mês</span></span></div>
+            <div className="flex items-center justify-between border-b border-[#1F222F] pb-5"><span className="text-sm text-[#A7ACB6]">Plano Gold</span><span className="text-2xl font-black text-white">{monthlyPrice}<span className="text-xs font-normal text-[#8E929F]">/mês</span></span></div>
             <p className="mt-6 text-sm leading-relaxed text-[#A7ACB6]">O checkout será conectado ao gateway de pagamento definido para a assinatura.</p>
             <button type="button" disabled className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-[#00C853] px-5 py-4 text-sm font-bold text-[#0B0C10] opacity-70">Continuar para pagamento <LockKeyhole size={16} /></button>
             <p className="mt-4 text-center text-xs text-[#737984]">Pagamento seguro. A integração do gateway será ativada nesta etapa.</p>

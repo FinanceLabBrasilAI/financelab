@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ProfileMenu from '../../components/core/ProfileMenu';
 import { ArrowRight, BellRing, BrainCircuit, CalendarDays, Check, Download, LineChart, ScanSearch, ShieldCheck, Sparkles, Wallet } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { fetchPlanPricing } from '../../services/planPricing';
 
 const benefits = [
   { icon: BellRing, title: 'Alertas em tempo real', text: 'Saiba quando um ativo, preço ou movimento merece sua atenção.' },
@@ -15,6 +17,14 @@ const benefits = [
 ];
 
 export default function GoldOfferPage() {
+  const [monthlyPrice, setMonthlyPrice] = useState('—');
+
+  useEffect(() => {
+    fetchPlanPricing()
+      .then(({ monthly }) => setMonthlyPrice(monthly || 'Indisponível'))
+      .catch(() => setMonthlyPrice('Indisponível'));
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#0B0C10] px-6 py-10 text-[#F5F5F7]">
       <div className="mx-auto max-w-5xl">
@@ -44,7 +54,7 @@ export default function GoldOfferPage() {
 
             <div className="rounded-3xl border border-[#FFC107]/50 bg-[#5D4037] p-6">
               <div className="flex items-center justify-between"><span className="text-xs font-bold uppercase tracking-[0.2em] text-[#FFECB3]">Plano premium</span><Sparkles size={22} className="text-[#FFC107]" /></div>
-              <p className="mt-5 text-4xl font-black text-[#FFF8E1]">R$ 29,90<span className="text-sm font-normal text-[#FFECB3]">/mês</span></p>
+              <p className="mt-5 text-4xl font-black text-[#FFF8E1]">{monthlyPrice}<span className="text-sm font-normal text-[#FFECB3]">/mês</span></p>
               <p className="mt-3 text-sm leading-relaxed text-[#FFECB3]">Tudo o que você precisa para sair da análise superficial e investir com contexto.</p>
               <div className="mt-6 border-t border-[#FFC107]/30 pt-5 text-sm text-[#FFF8E1]"><Check size={16} className="mr-2 inline text-[#FFC107]" /> Acesso completo ao FinanceLab GOLD</div>
             </div>

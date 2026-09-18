@@ -9,6 +9,7 @@ import GridBackground from "../components/core/GridBackground";
 import MobileVideoFrame from "../components/core/MobileVideoFrame";
 import PricingCard from "../components/ui/PricingCard";
 import { getStoredUser, StoredUser } from "../services/api";
+import { fetchPlanPricing } from "../services/planPricing";
 import {
   ArrowRight,
   BarChart3,
@@ -152,9 +153,13 @@ export default function FinanceLabHome() {
   const router = useRouter();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [user, setUser] = useState<StoredUser | null>(null);
+  const [goldPriceLabel, setGoldPriceLabel] = useState('—');
 
   useEffect(() => {
     setUser(getStoredUser());
+    fetchPlanPricing()
+      .then(({ monthly }) => setGoldPriceLabel(monthly || 'Indisponível'))
+      .catch(() => setGoldPriceLabel('Indisponível'));
   }, []);
 
   const toggleFaq = (index: number) => {
@@ -163,6 +168,15 @@ export default function FinanceLabHome() {
 
   const goToRegister = (plan: 'silver' | 'gold' = 'silver') => {
     router.push(`/register?plan=${plan}`);
+  };
+
+  const selectPlan = (plan: 'silver' | 'gold') => {
+    if (!user) {
+      goToRegister(plan);
+      return;
+    }
+
+    router.push(plan === 'gold' ? '/checkout' : '/oferta-gold');
   };
 
   return (
@@ -409,7 +423,7 @@ export default function FinanceLabHome() {
               <PricingCard
                 key={name}
                 name={name}
-                price={price}
+                price={name === "Gold" ? goldPriceLabel : price}
                 period={price !== "Gratuito" ? "/mês" : ""}
                 description={
                   name === "Gold"
@@ -420,7 +434,7 @@ export default function FinanceLabHome() {
                 isPopular={highlight}
                 buttonText={name === "Gold" ? (user?.plano?.toLowerCase() === 'gold' ? "✓ Você já é assinante Gold" : "Assinar Gold") : user ? "✓ Você já é usuário Silver" : "Começar grátis"}
                 isStatus={!!user && (name === 'Silver' || user.plano?.toLowerCase() === 'gold')}
-                onSelect={() => name === 'Gold' ? router.push('/checkout') : router.push('/oferta-gold')}
+                onSelect={() => selectPlan(name === 'Gold' ? 'gold' : 'silver')}
               />
             ))}
           </div>
